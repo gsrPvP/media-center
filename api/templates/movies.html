@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus filmes - Media Center</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <a href="/" class="logo">
+                MEDIA<span>CENTER</span>
+            </a>
+            <p>Sua biblioteca de filmes</p>
+        </header>
+
+        <section class="welcome">
+            <h1>Meus filmes</h1>
+
+            <div class="actions">
+                <a href="/movies/new" class="button primary">
+                    + Adicionar filme
+                </a>
+                <a href="/" class="button secondary">
+                    Voltar ao início
+                </a>
+            </div>
+
+                    
+        <div class="movie-grid">
+            {% for movie in movies %}
+                <article class="movie-card">
+                    <div class="movie-cover">
+                        <span>▶</span>
+                    </div>
+
+                    <div class="movie-info">
+                        <h2>{{ movie.title }}</h2>
+
+                        <div class="movie-meta">
+                            {% if movie.year %}
+                                <span>{{ movie.year }}</span>
+                            {% endif %}
+
+                            {% if movie.duration_seconds %}
+                                <span>
+                                    {{ movie.duration_seconds // 60 }} min
+                                </span>
+                            {% endif %}
+                        </div>
+                        <button
+                            class="play-button"
+                            data-movie-id="{{ movie['id'] }}"
+                        >
+                            ▶ Reproduzir
+                        </button>
+                    </div>
+                </article>
+            {% else %}
+                <p class="empty-state">
+                    Nenhum filme cadastrado ainda. Adicione o primeiro!
+                </p>
+            {% endfor %}
+        </div>
+
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

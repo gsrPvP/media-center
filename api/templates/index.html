@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Center</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <span class="logo">MEDIA<span>CENTER</span></span>
+            <p>Seu espaço de entretenimento.</p>
+        </header>
+
+        <section class="welcome">
+            <p class="eyebrow">BEM-VINDO AO SEU MEDIA CENTER</p>
+            <h1>O que vamos assistir hoje?</h1>
+            <p class="description">
+                Acesse sua biblioteca de filmes ou adicione novos títulos
+                à sua coleção.
+            </p>
+
+            <div class="actions">
+                <a href="/movies" class="button primary">
+                    Ver meus filmes
+                </a>
+
+                <a href="/movies/new" class="button secondary">
+                    + Adicionar filme
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            Media Center · Sua biblioteca pessoal
+        </footer>
+    </main>
+</body>
+</html>

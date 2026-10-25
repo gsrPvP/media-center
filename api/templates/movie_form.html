@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar filme - Media Center</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <a href="/" class="logo">
+                MEDIA<span>CENTER</span>
+            </a>
+            <p>Adicionar à biblioteca</p>
+        </header>
+
+        <section class="form-section">
+            <h1>Novo filme</h1>
+            <p class="description">
+                Preencha as informações do arquivo que deseja cadastrar.
+            </p>
+
+            {% if error %}
+                <div class="form-error">{{ error }}</div>
+            {% endif %}
+
+            <form action="{{ url_for('new_movie_page') }}"
+                  method="POST"
+                  class="movie-form">
+
+                <label for="title">Título *</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Ex.: Interestelar"
+                    required
+                >
+
+                <label for="year">Ano de lançamento</label>
+                <input
+                    type="number"
+                    id="year"
+                    name="year"
+                    placeholder="Ex.: 2014"
+                    min="1"
+                >
+
+                <label for="path">Caminho do arquivo *</label>
+                <input
+                    type="text"
+                    id="path"
+                    name="path"
+                    placeholder="/home/jurek/filmes/filme.mp4"
+                    required
+                >
+
+                <label for="duration_seconds">
+                    Duração em segundos
+                </label>
+                <input
+                    type="number"
+                    id="duration_seconds"
+                    name="duration_seconds"
+                    placeholder="Ex.: 7200"
+                    min="1"
+                >
+
+                <button type="submit" class="button primary">
+                    Cadastrar filme
+                </button>
+            </form>
+
+            <div class="actions">
+                <a href="/movies" class="button secondary">
+                    Cancelar
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

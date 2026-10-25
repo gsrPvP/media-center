@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie['title'] }} - Media Center</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="player-page">
+
+    <header class="player-header">
+        <a href="{{ url_for('movies_page') }}" class="brand">
+            ▶ MEDIA<span>CENTER</span>
+        </a>
+    </header>
+
+    <main class="player-layout">
+        <section class="player-main">
+
+            <a href="{{ url_for('movies_page') }}" class="back-link">
+                ← Voltar ao catálogo
+            </a>
+
+            <div class="movie-screen">
+                <div class="movie-cover">
+                    <div class="cover-info">
+                        <h1>{{ movie['title'] }}</h1>
+                        <p>
+                            {{ movie['year'] or 'Ano desconhecido' }}
+                            · Media Center
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <input
+                        type="range"
+                        min="0"
+                        max="{{ movie['duration_seconds'] or 100 }}"
+                        value="0"
+                        id="movie-progress"
+                    >
+
+                    <div class="time-labels">
+                        <span id="current-time">00:00</span>
+                        <span id="total-time">
+                            {% if movie['duration_seconds'] %}
+                                {{ '%02d:%02d' | format(
+                                    movie['duration_seconds'] // 3600,
+                                    (movie['duration_seconds'] % 3600) // 60
+                                ) }}
+                            {% else %}
+                                --:--
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="playback-controls">
+                    <button disabled title="Anterior">|◀</button>
+
+                    <button data-action="bwd" title="Voltar 10 segundos">
+                        ↶ 10
+                    </button>
+
+                    <button class="pause-button"
+                            data-action="pause"
+                            title="Pausar">
+                        Ⅱ
+                    </button>
+
+                    <button data-action="fwd" title="Avançar 10 segundos">
+                        ↷ 10
+                    </button>
+
+                    <button disabled title="Próximo">▶|</button>
+                </div>
+
+                <p class="player-message" id="player-message">
+                    O filme foi enviado ao player. Controles em desenvolvimento.
+                </p>
+            </div>
+        </section>
+
+        <aside class="player-sidebar">
+            <h2>Controles</h2>
+
+            <p class="status-indicator">
+                Estado: <span id="player-status">CONSULTANDO...</span>
+            </p>
+
+            <p class="sidebar-description">
+                O vídeo está sendo executado pelo player conectado.
+            </p>
+
+            <button class="stop-button" data-action="stop">
+                ■ Parar de assistir
+            </button>
+
+            <a href="{{ url_for('movies_page') }}" class="back-link">
+                Voltar ao catálogo
+            </a>
+        </aside>
+    </main>
+
+    <script src="{{ url_for('static', filename='player.js') }}"></script>
+</body>
+</html>

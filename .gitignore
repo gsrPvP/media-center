@@ -1,0 +1,36 @@
+```gitignore
+# Git
+.git/
+
+# Build C/CMake
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+*.o
+*.a
+*.so
+*.so.*
+media-srv
+media-cli
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+
+# Banco de dados e arquivos locais
+*.db
+*.sqlite
+*.sqlite3
+
+# Sistema/editor
+.DS_Store
+.vscode/
+.idea/
+```
